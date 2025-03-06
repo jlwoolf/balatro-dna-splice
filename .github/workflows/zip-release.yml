@@ -17,16 +17,23 @@ jobs:
             echo "$delimiter"
         } >> "$GITHUB_ENV"
         
-    - name: Archive Release
+    - name: Archive Release Zip
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: 'zip'
         filename: '${{ fromJson(env.METADATA).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
+    - name: Archive Release Tar
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: 'tar'
+        filename: '${{ fromJson(env.METADATA).version }}.tar.gz'
+        exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
+
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
-        artifacts: "${{ fromJson(env.METADATA).version }}.zip"
+        artifacts: "${{ fromJson(env.METADATA).version }}.zip,${{ fromJson(env.METADATA).version }}.tar.gz"
         commit: "main"
         tag: "${{ fromJson(env.METADATA).version }}"
