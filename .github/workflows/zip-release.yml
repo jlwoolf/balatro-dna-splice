@@ -29,6 +29,6 @@ jobs:
       with:
         allowUpdates: true
         replacesArtifacts: true
-        artifacts: "${{ fromJson(env.METADATA).version }}.zip,${{ fromJson(env.METADATA).version }}.tar.gz"
+        artifacts: "${{ fromJson(env.METADATA).version }}.zip"
         commit: "main"
         tag: "${{ fromJson(env.METADATA).version }}"
