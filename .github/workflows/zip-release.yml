@@ -10,9 +10,11 @@ jobs:
     
     - name: Get the version
       run: |
-        echo 'METADATA_JSON<<EOF' >> $GITHUB_ENV
-        cat ./DNASplice.json >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
+        {
+          echo 'METADATA_JSON<<EOF'
+          cat ./DNASplice.json
+          echo EOF
+        } >> "$GITHUB_ENV"
         
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.5
