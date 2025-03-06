@@ -24,13 +24,6 @@ jobs:
         filename: '${{ fromJson(env.METADATA).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
-    - name: Archive Release Tar
-      uses: thedoctor0/zip-release@0.7.5
-      with:
-        type: 'tar'
-        filename: '${{ fromJson(env.METADATA).version }}.tar.gz'
-        exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
-
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
