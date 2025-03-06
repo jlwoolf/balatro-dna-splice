@@ -6,17 +6,24 @@ jobs:
     permissions:
       contents: write
     steps:
+    - name: Get the version
+      id: version_step
+      run: |
+        echo 'METADATA_JSON<<EOF' >> $GITHUB_ENV
+        cat ./DNASplice.json >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+
     - uses: actions/checkout@master
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: 'zip'
-        filename: 'release.zip'
+        filename: '${{ fromJson(env.METADATA_JSON).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
-        artifacts: "release.zip"
+        artifacts: "${{ fromJson(env.METADATA_JSON).version }}.zip"
         commit: "main"
-        tag: "main"
+        tag: "${{ fromJson(env.METADATA_JSON).version }}"
