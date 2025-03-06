@@ -27,7 +27,8 @@ jobs:
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
+        allowUpdates: true
+        replacesArtifacts: true
         artifacts: "${{ fromJson(env.METADATA).version }}.zip,${{ fromJson(env.METADATA).version }}.tar.gz"
         commit: "main"
         tag: "${{ fromJson(env.METADATA).version }}"
-        replacesArtifacts: true
