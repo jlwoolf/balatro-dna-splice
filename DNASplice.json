@@ -1,0 +1,14 @@
+{
+    "id": "DNASplice",
+    "name": "DNA Splice",
+    "display_name": "DNA Splice",
+    "author": ["jlwoolf"],
+    "description": "Adds a tag that creates a free negative DNA joker in the shop.",
+    "prefix": "dna_splice",
+    "main_file": "index.lua",
+    "badge_colour": "",
+    "badge_text_colour": "",
+    "version": "1.0.0",
+    "dependencies": ["Steamodded (>=1.*)", "Lovely (>=0.6)"]
+  }
+  
