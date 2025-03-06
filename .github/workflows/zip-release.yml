@@ -30,3 +30,4 @@ jobs:
         artifacts: "${{ fromJson(env.METADATA).version }}.zip,${{ fromJson(env.METADATA).version }}.tar.gz"
         commit: "main"
         tag: "${{ fromJson(env.METADATA).version }}"
+        replacesArtifacts: true
