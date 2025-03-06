@@ -6,14 +6,14 @@ jobs:
     permissions:
       contents: write
     steps:
+    - uses: actions/checkout@master
+    
     - name: Get the version
-      id: version_step
       run: |
         echo 'METADATA_JSON<<EOF' >> $GITHUB_ENV
         cat ./DNASplice.json >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
-
-    - uses: actions/checkout@master
+        
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.5
       with:
