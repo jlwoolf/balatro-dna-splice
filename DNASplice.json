@@ -3,7 +3,7 @@
     "name": "DNA Splice",
     "display_name": "DNA Splice",
     "author": ["jlwoolf"],
-    "description": "Adds a tag that creates a free negative DNA joker in the shop.",
+    "description": "Adds a deck and a tag that give a free DNA joker.",
     "prefix": "dna_splice",
     "main_file": "index.lua",
     "badge_colour": "",
