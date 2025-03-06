@@ -10,22 +10,23 @@ jobs:
     
     - name: Get the version
       run: |
+        delimiter=$(openssl rand -hex 8)
         {
-          echo 'METADATA_JSON<<EOF'
-          cat ./DNASplice.json
-          echo EOF
+            echo "METADATA<<$delimiter"
+            sed -e '$a\' DNASplice.json
+            echo "$delimiter"
         } >> "$GITHUB_ENV"
         
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: 'zip'
-        filename: '${{ fromJson(env.METADATA_JSON).version }}.zip'
+        filename: '${{ fromJson(env.METADATA).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
-        artifacts: "${{ fromJson(env.METADATA_JSON).version }}.zip"
+        artifacts: "${{ fromJson(env.METADATA).version }}.zip"
         commit: "main"
-        tag: "${{ fromJson(env.METADATA_JSON).version }}"
+        tag: "${{ fromJson(env.METADATA).version }}"
