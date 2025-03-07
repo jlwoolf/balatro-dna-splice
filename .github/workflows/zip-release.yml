@@ -1,5 +1,9 @@
 name: Create Archive
 on: [push]
+
+env:
+  FILE_PREFIX: dna-splice
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +25,7 @@ jobs:
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: 'zip'
-        filename: 'dna-splice-${{ fromJson(env.METADATA).version }}.zip'
+        filename: '$FILE_PREFIX-${{ fromJson(env.METADATA).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
     - name: Upload Release
@@ -29,7 +33,7 @@ jobs:
       with:
         allowUpdates: true
         replacesArtifacts: true
-        artifacts: "${{ fromJson(env.METADATA).version }}.zip"
+        artifacts: "$FILE_PREFIX-${{ fromJson(env.METADATA).version }}.zip"
         body: ""
         commit: "main"
         tag: "${{ fromJson(env.METADATA).version }}"
