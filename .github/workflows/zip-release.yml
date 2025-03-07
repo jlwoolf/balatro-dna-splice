@@ -28,6 +28,11 @@ jobs:
         filename: '${{ env.MOD_NAME }}-${{ fromJson(env.METADATA).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
+    - uses: rickstaa/action-create-tag@v1
+      with:
+        tag: "${{ fromJson(env.METADATA).version }}"
+        tag_exists_error: false
+
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
