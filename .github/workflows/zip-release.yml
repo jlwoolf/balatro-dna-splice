@@ -2,7 +2,7 @@ name: Create Archive
 on: [push]
 
 env:
-  FILE_PREFIX: dna-splice
+  MOD_NAME: dna-splice
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
         delimiter=$(openssl rand -hex 8)
         {
             echo "METADATA<<$delimiter"
-            sed -e '$a\' dna-splice.json
+            sed -e '$a\' "$MOD_NAME".json
             echo "$delimiter"
         } >> "$GITHUB_ENV"
         
@@ -25,7 +25,7 @@ jobs:
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: 'zip'
-        filename: '$FILE_PREFIX-${{ fromJson(env.METADATA).version }}.zip'
+        filename: '${{ env.MOD_NAME }}-${{ fromJson(env.METADATA).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
     - name: Upload Release
@@ -33,7 +33,7 @@ jobs:
       with:
         allowUpdates: true
         replacesArtifacts: true
-        artifacts: "$FILE_PREFIX-${{ fromJson(env.METADATA).version }}.zip"
+        artifacts: "${{ env.MOD_NAME }}-${{ fromJson(env.METADATA).version }}.zip"
         body: ""
         commit: "main"
         tag: "${{ fromJson(env.METADATA).version }}"
