@@ -1,0 +1,13 @@
+{
+  "id": "dna-splice",
+  "name": "DNA Splice",
+  "display_name": "DNA Splice",
+  "author": ["jlwoolf"],
+  "description": "Adds a deck and a tag that give a free DNA joker.",
+  "prefix": "dna_splice",
+  "main_file": "main.lua",
+  "badge_colour": "",
+  "badge_text_colour": "",
+  "version": "1.0.0",
+  "dependencies": ["Steamodded (>=1.*)", "Lovely (>=0.6)", "loader-api (>=1.*)"]
+}

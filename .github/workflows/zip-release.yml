@@ -13,7 +13,7 @@ jobs:
         delimiter=$(openssl rand -hex 8)
         {
             echo "METADATA<<$delimiter"
-            sed -e '$a\' DNASplice.json
+            sed -e '$a\' dna-splice.json
             echo "$delimiter"
         } >> "$GITHUB_ENV"
         
@@ -21,7 +21,7 @@ jobs:
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: 'zip'
-        filename: '${{ fromJson(env.METADATA).version }}.zip'
+        filename: 'dna-splice-${{ fromJson(env.METADATA).version }}.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig *.github*'
 
     - name: Upload Release
@@ -30,6 +30,6 @@ jobs:
         allowUpdates: true
         replacesArtifacts: true
         artifacts: "${{ fromJson(env.METADATA).version }}.zip"
-        body: "**Full Changelog**: https://github.com/jlwoolf/DNASplice/commits/${{ fromJson(env.METADATA).version }}"
+        body: "**Full Changelog**: https://github.com/jlwoolf/balatro-dna-splice/commits/${{ fromJson(env.METADATA).version }}"
         commit: "main"
         tag: "${{ fromJson(env.METADATA).version }}"
