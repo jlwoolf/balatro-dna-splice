@@ -1,15 +1,17 @@
-SMODS.Atlas({
-	key = "dna_splice_deck",
-	path = "dna_splice_deck.png",
+local ATLAS_KEY = DNA_SPLICE.MOD.id .. "-deck"
+
+DNA_SPLICE.BACK_ATLAS = SMODS.Atlas({
+	key = ATLAS_KEY,
+	path = "deck.png",
 	px = 71,
 	py = 95,
 })
 
 local config = DNA_SPLICE.CONFIG and DNA_SPLICE.CONFIG.deck
 
-SMODS.Back({
-	atlas = "dna_splice_deck",
-	key = "dna_splice",
+DNA_SPLICE.BACK = SMODS.Back({
+	atlas = ATLAS_KEY,
+	key = "slug",
 	name = "DNA Splice Deck",
 	loc_txt = {
 		name = "DNA Splice Deck",

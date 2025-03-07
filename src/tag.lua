@@ -1,21 +1,23 @@
-local config = DNA_SPLICE.CONFIG["tag"]
+local ATLAS_KEY = DNA_SPLICE.MOD.id .. "-tag"
 
-SMODS.Atlas({
-	key = "dna_splice_tag",
-	path = "dna_splice_tag.png",
+DNA_SPLICE.TAG_ATLAS = SMODS.Atlas({
+	key = ATLAS_KEY,
+	path = "tag.png",
 	px = 34,
 	py = 34,
 })
 
-SMODS.Tag({
-	atlas = "dna_splice_tag",
+local config = DNA_SPLICE.CONFIG["tag"]
+
+DNA_SPLICE.TAG = SMODS.Tag({
+	atlas = ATLAS_KEY,
 	config = {
 		type = "store_joker_create",
 	},
 	discovered = true,
-	key = "dna_splice",
+	key = "slug",
 	in_pool = function()
-		return config and config["tag"]["enabled"] or false
+		return config.enabled or false
 	end,
 	loc_txt = {
 		name = "DNA Splice Tag",

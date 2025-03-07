@@ -1,14 +1,17 @@
-local config = SMODS.current_mod.config
+local config = DNA_SPLICE.CONFIG
+
+---@type 'deck'|'tag'
+LAST_SELECTED_CONFIG_TAB = "deck"
 
 ---callback for the tag config enabled toggle
 ---@param enabled any
 local function toggle_tag(enabled)
-	local tag = SMODS.Tags[TAG_KEY]
+	local tag = SMODS.Tags[DNA_SPLICE.TAG.key]
 	if enabled then
-		G.P_TAGS[TAG_KEY] = tag
+		G.P_TAGS[DNA_SPLICE.TAG.key] = tag
 		SMODS.insert_pool(G.P_CENTER_POOLS[tag.set], tag)
 	else
-		G.P_TAGS[TAG_KEY] = nil
+		G.P_TAGS[DNA_SPLICE.TAG.key] = nil
 		SMODS.remove_pool(G.P_CENTER_POOLS[tag.set], tag)
 	end
 end
@@ -16,7 +19,7 @@ end
 ---callback for the deck config enabled toggle
 ---@param enabled any
 local function toggle_deck(enabled)
-	local deck = SMODS.Centers[DECK_KEY]
+	local deck = SMODS.Centers[DNA_SPLICE.BACK.key]
 	deck.omit = not enabled
 end
 
@@ -62,7 +65,7 @@ end
 local function create_dna_tag_node()
 	--- copied over from Tag:generate_UI but removed dependencies that come from
 	--- actual tag definition. This way sprite can render without tag enabled
-	local tag_sprite = Sprite(0, 0, 0.8, 0.8, G.ASSET_ATLAS["dna_splice_tag"], { x = 0, y = 0 })
+	local tag_sprite = Sprite(0, 0, 0.8, 0.8, G.ASSET_ATLAS[DNA_SPLICE.TAG.atlas], { x = 0, y = 0 })
 	tag_sprite.T.scale = 1
 	tag_sprite.float = true
 	tag_sprite.states.hover.can = true
@@ -139,7 +142,7 @@ local function create_dna_card_node()
 		{ card_limit = 5, type = "deck", highlight_limit = 0, deck_height = 0.75, thin_draw = 1 }
 	)
 
-	G.GAME.viewed_back = Back(SMODS.Centers[DECK_KEY])
+	G.GAME.viewed_back = Back(SMODS.Centers[DNA_SPLICE.BACK.key])
 
 	for i = 1, 10 do
 		local card = Card(
@@ -207,7 +210,7 @@ local function config_tab()
 	SMODS.LAST_SELECTED_MOD_TAB = "mod_desc"
 	G.FUNCS.overlay_menu({
 		definition = (create_UIBox_generic_options({
-			back_func = "openModUI_DNASplice",
+			back_func = "openModUI_" .. DNA_SPLICE.MOD.id,
 			contents = {
 				{
 					n = G.UIT.R,
