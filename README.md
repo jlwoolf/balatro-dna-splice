@@ -1,5 +1,5 @@
 # DNA Splice - A Balatro Modded Deck & Tag
-Adds a deck and a tag that give a free DNA joker. Requires (loader-api)[https://github.com/jlwoolf/balatro-loader-api].
+Adds a deck and a tag that give a free DNA joker. Requires [loader-api](https://github.com/jlwoolf/balatro-loader-api).
 ### Mod Config Options
 #### Deck
 - **Enabled**: whether or not the deck is enabled/playable
