@@ -9,5 +9,5 @@
   "badge_colour": "",
   "badge_text_colour": "",
   "version": "1.0.0",
-  "dependencies": ["Steamodded (>=1.*)", "Lovely (>=0.6)", "loader-api (>=1.*)"]
+  "dependencies": ["Steamodded (>=1.*)", "Lovely (>=0.6)", "loader-api (>=1.*)", "config-api (>=0.2.*)"]
 }
