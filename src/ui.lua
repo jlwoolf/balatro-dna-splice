@@ -26,12 +26,7 @@ end
 ---creates the toggles for the config tab
 ---@param variant 'deck'|'tag'
 ---@return table
-local function create_config_toggles(variant)
-	local callback = {
-		tag = toggle_tag,
-		deck = toggle_deck,
-	}
-
+local function create_config_toggles(variant, callback)
 	return {
 		n = G.UIT.C,
 		config = {
@@ -47,7 +42,7 @@ local function create_config_toggles(variant)
 				label = "Enabled",
 				ref_table = config and config[variant] or {},
 				ref_value = "enabled",
-				callback = callback[variant],
+				callback = callback,
 				w = 1,
 			}),
 			create_toggle({
@@ -162,75 +157,57 @@ local function create_dna_card_node()
 	return { n = G.UIT.O, config = { object = area } }
 end
 
----creates a config tab of a specified variant
----@param variant 'deck'|'tag'
----@return table
-local function create_config_tab(variant)
-	local node_functions = {
-		deck = create_dna_card_node,
-		tag = create_dna_tag_node,
-	}
-
-	local label = {
-		deck = "Deck",
-		tag = "Tag",
-	}
-
-	return {
-		label = label[variant],
-		chosen = LAST_SELECTED_CONFIG_TAB == variant or false,
-		tab_definition_function = function(...)
-			LAST_SELECTED_CONFIG_TAB = variant
-
-			return {
-				n = G.UIT.ROOT,
-				config = { align = "cm", padding = 0.05, colour = G.C.CLEAR },
-				nodes = {
-					{
-						n = G.UIT.R,
-						config = { align = "cm", colour = G.C.CLEAR, r = 0.2 },
-						nodes = {
-							{
-								n = G.UIT.C,
-								config = { align = "cm", padding = 0 },
-								nodes = { node_functions[variant]() },
+DNA_SPLICE.CONFIG_UI = {
+	tag = {
+		order = 2,
+		custom = {
+			type = "custom",
+			build = function()
+				return {
+					n = G.UIT.ROOT,
+					config = { colour = G.C.CLEAR },
+					nodes = {
+						{
+							n = G.UIT.R,
+							config = { align = "cm", colour = G.C.CLEAR, r = 0.2 },
+							nodes = {
+								{
+									n = G.UIT.C,
+									config = { align = "cm", padding = 0 },
+									nodes = { create_dna_tag_node() },
+								},
+								create_config_toggles("tag", toggle_deck),
 							},
-							create_config_toggles(variant),
 						},
 					},
-				},
-			}
-		end,
-	}
-end
-
----the config tab for the mod
----@return table
-local function config_tab()
-	SMODS.LAST_SELECTED_MOD_TAB = "mod_desc"
-	G.FUNCS.overlay_menu({
-		definition = (create_UIBox_generic_options({
-			back_func = "openModUI_" .. DNA_SPLICE.MOD.id,
-			contents = {
-				{
-					n = G.UIT.R,
-					config = {
-						padding = 0,
-						align = "tm",
-					},
+				}
+			end,
+		},
+	},
+	deck = {
+		order = 1,
+		custom = {
+			type = "custom",
+			build = function()
+				return {
+					n = G.UIT.ROOT,
+					config = { colour = G.C.CLEAR },
 					nodes = {
-						create_tabs({
-							snap_to_nav = true,
-							colour = G.C.MULT,
-							tab_alignment = "tm",
-							tabs = { create_config_tab("deck"), create_config_tab("tag") },
-						}),
+						{
+							n = G.UIT.R,
+							config = { align = "cm", colour = G.C.CLEAR, r = 0.2 },
+							nodes = {
+								{
+									n = G.UIT.C,
+									config = { align = "cm", padding = 0 },
+									nodes = { create_dna_card_node() },
+								},
+								create_config_toggles("deck", toggle_deck),
+							},
+						},
 					},
-				},
-			},
-		})),
-	})
-	return {}
-end
-
-SMODS.current_mod.config_tab = config_tab
+				}
+			end,
+		},
+	},
+}

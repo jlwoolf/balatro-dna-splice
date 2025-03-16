@@ -1,4 +1,6 @@
 DNA_SPLICE = {
 	MOD = SMODS.current_mod,
 }
+
 LOADER_API.init()
+CONFIG_API.init(DNA_SPLICE.CONFIG_UI)
