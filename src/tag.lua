@@ -7,7 +7,7 @@ DNA_SPLICE.TAG_ATLAS = SMODS.Atlas({
 	py = 34,
 })
 
-local config = DNA_SPLICE.CONFIG["tag"]
+local config = SMODS.current_mod.config and SMODS.current_mod.config['tag'] or {}
 
 DNA_SPLICE.TAG = SMODS.Tag({
 	atlas = ATLAS_KEY,

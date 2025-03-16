@@ -7,7 +7,7 @@ DNA_SPLICE.BACK_ATLAS = SMODS.Atlas({
 	py = 95,
 })
 
-local config = DNA_SPLICE.CONFIG and DNA_SPLICE.CONFIG.deck
+local config = SMODS.current_mod.config and SMODS.current_mod.config['deck'] or {}
 
 DNA_SPLICE.BACK = SMODS.Back({
 	atlas = ATLAS_KEY,
