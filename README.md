@@ -2,7 +2,7 @@
 Adds a deck and a tag that give a free DNA joker.
 
 ## Dependencies
-Requires my (loader-api)[https://github.com/jlwoolf/balatro-loader-api] and (config-api)[https://github.com/jlwoolf/balatro-config-api].
+Requires my [loader-api](https://github.com/jlwoolf/balatro-loader-api) and [config-api](https://github.com/jlwoolf/balatro-config-api).
 
 ## Mod Config Options
 ### Deck
